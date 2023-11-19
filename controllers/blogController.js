@@ -27,15 +27,21 @@ const getBlog = async (req, res) => {
 
 // create new blog
 const createBlog = async (req, res) => {
-  const { title, description } = req.body;
+  const { username, title, description, category } = req.body;
 
   let emptyFields = [];
 
+  if (!username) {
+    emptyFields.push("username");
+  }
   if (!title) {
     emptyFields.push("title");
   }
   if (!description) {
     emptyFields.push("description");
+  }
+  if (!category) {
+    emptyFields.push("category");
   }
   if (emptyFields.length > 0) {
     return res
@@ -46,7 +52,13 @@ const createBlog = async (req, res) => {
   // add doc to db
   try {
     const user_id = req.user._id;
-    const blog = await Blog.create({ title, description, user_id });
+    const blog = await Blog.create({
+      username,
+      title,
+      description,
+      category,
+      user_id,
+    });
     res.status(200).json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });
