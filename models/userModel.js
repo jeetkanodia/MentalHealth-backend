@@ -16,6 +16,7 @@ const userSchema = new Scheme({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 
