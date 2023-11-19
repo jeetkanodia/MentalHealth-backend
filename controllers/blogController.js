@@ -45,7 +45,8 @@ const createBlog = async (req, res) => {
 
   // add doc to db
   try {
-    const blog = await Blog.create({ title, description });
+    const user_id = req.user._id;
+    const blog = await Blog.create({ title, description, user_id });
     res.status(200).json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });

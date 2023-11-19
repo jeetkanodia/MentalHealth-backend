@@ -12,7 +12,12 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
+    user_id: {
+      type: String,
+      required: true,
+    },
   },
+
   { timestamps: true }
 );
 
