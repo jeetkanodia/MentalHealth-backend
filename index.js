@@ -15,7 +15,10 @@ app.use(
     allowedHeaders: "Content-Type, Authorization",
   })
 );
-
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "frame-ancestors 'none'; default-src 'self'; script-src 'self'"); // Modify directives as needed
+  next();
+});
 app.use(express.json());
 
 app.use((req, res, next) => {
